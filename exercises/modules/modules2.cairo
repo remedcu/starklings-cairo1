@@ -1,4 +1,3 @@
-// I AM NOT DONE
 // These modules have some issues, can you fix?
 // Run `starklings hint modules2` or `hint` watch command for a hint.
 
@@ -18,7 +17,7 @@ mod order {
     fn new_order( name: felt252, made_by_phone: bool, item: felt252 ) -> Order {
         Order {
             name,
-            year: YEAR,
+            year: super::YEAR,
             made_by_phone,
             made_by_email: ! made_by_phone,
             item,
@@ -26,16 +25,19 @@ mod order {
     }
 }
 
+use order::Order;
+use order::new_order;
+
 mod order_utils {
-    fn dummy_phoned_order( name: felt252 ) -> Order {
-        new_order( name, true, 'item_a' )
+    fn dummy_phoned_order( name: felt252 ) -> super::Order {
+        super::new_order( name, true, 'item_a' )
     }
 
-    fn dummy_emailed_order( name: felt252 ) -> Order {
-        new_order( name, false, 'item_a' )
+    fn dummy_emailed_order( name: felt252 ) -> super::Order {
+        super::new_order( name, false, 'item_a' )
     }
 
-    fn order_fees( order: Order ) -> felt252 {
+    fn order_fees( order: super::Order ) -> felt252 {
         if order.made_by_phone {
             return 500;
         }
